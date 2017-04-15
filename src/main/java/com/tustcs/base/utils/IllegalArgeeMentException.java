@@ -1,4 +1,4 @@
-package utils;
+package com.tustcs.base.utils;
 
 /**
  * Created by yhy on 2016/7/14.

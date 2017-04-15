@@ -1,4 +1,4 @@
-package services;
+package com.tustcs.base.services;
 
 //
 // Source code recreated from a .class file by IntelliJ IDEA
@@ -6,7 +6,7 @@ package services;
 //
 
 
-import utils.JSObject;
+import com.tustcs.base.utils.JSObject;
 
 import java.util.List;
 

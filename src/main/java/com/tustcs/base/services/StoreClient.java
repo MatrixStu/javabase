@@ -1,6 +1,7 @@
-package services;
+package com.tustcs.base.services;
 
-import db.Sql;
+import com.tustcs.base.db.Sql;
+import com.tustcs.base.utils.*;
 import utils.*;
 
 import java.util.*;
@@ -137,7 +138,7 @@ public class StoreClient extends Store {
                 } else {
                     this.whereFlag = true;
                     JSObject zo = new JSObject();
-                    zo.put("connector", Long.valueOf(Store.WHERE));
+                    zo.put("connector", Long.valueOf(WHERE));
                     zo.put("filter", filter);
                     this.filterObject.add("filters", zo);
                     return this;
@@ -153,7 +154,7 @@ public class StoreClient extends Store {
                     throw new IllegalArgeeMentException("where clause not found");
                 } else {
                     JSObject zo = new JSObject();
-                    zo.put("connector", Long.valueOf(Store.AND));
+                    zo.put("connector", Long.valueOf(AND));
                     zo.put("filter", filter);
                     this.filterObject.add("filters", zo);
                     return this;
@@ -169,7 +170,7 @@ public class StoreClient extends Store {
                     throw new IllegalArgeeMentException("where clause not found");
                 } else {
                     JSObject zo = new JSObject();
-                    zo.put("connector", Long.valueOf(Store.OR));
+                    zo.put("connector", Long.valueOf(OR));
                     zo.put("filter", filter);
                     this.filterObject.add("filters", zo);
                     return this;
@@ -186,15 +187,15 @@ public class StoreClient extends Store {
             for (int i$ = 0; i$ < len$; ++i$) {
                 String key = arr$[i$];
                 if (this.orderByMap.containsKey(key)) {
-                    if (((Long) this.orderByMap.get(key)).longValue() != Store.ASC) {
+                    if (((Long) this.orderByMap.get(key)).longValue() != ASC) {
                         throw new IllegalArgeeMentException("conflict order on same key");
                     }
                 } else {
                     JSObject zo = new JSObject();
                     zo.put("key", key);
-                    zo.put("order", Long.valueOf(Store.ASC));
+                    zo.put("order", Long.valueOf(ASC));
                     this.filterObject.add("orderBy", zo);
-                    this.orderByMap.put(key, Long.valueOf(Store.ASC));
+                    this.orderByMap.put(key, Long.valueOf(ASC));
                 }
             }
             return this;
@@ -207,15 +208,15 @@ public class StoreClient extends Store {
             for (int i$ = 0; i$ < len$; ++i$) {
                 String key = arr$[i$];
                 if (this.orderByMap.containsKey(key)) {
-                    if (((Long) this.orderByMap.get(key)).longValue() != Store.DESC) {
+                    if (((Long) this.orderByMap.get(key)).longValue() != DESC) {
                         throw new IllegalArgeeMentException("conflict order on same key");
                     }
                 } else {
                     JSObject zo = new JSObject();
                     zo.put("key", key);
-                    zo.put("order", Long.valueOf(Store.DESC));
+                    zo.put("order", Long.valueOf(DESC));
                     this.filterObject.add("orderBy", zo);
-                    this.orderByMap.put(key, Long.valueOf(Store.DESC));
+                    this.orderByMap.put(key, Long.valueOf(DESC));
                 }
             }
 
@@ -244,21 +245,21 @@ public class StoreClient extends Store {
                     for (JSObject filter : filters) {
                         long con = filter.get("connector");
                         switch ((int) con) {
-                            case Store.WHERE: {
+                            case WHERE: {
                                 JSObject fi = filter.get("filter");
                                 sql += (" where " + fi.get("key") + " " + getOp((Long) fi.get("operator")) + " ?");
                                 values.add(fi.get("value"));
                             }
                             break;
 
-                            case Store.AND: {
+                            case AND: {
                                 JSObject fi = filter.get("filter");
                                 sql += (" and " + fi.get("key") + " " + getOp((Long) fi.get("operator")) + " ?");
                                 values.add(fi.get("value"));
                             }
                             break;
 
-                            case Store.OR: {
+                            case OR: {
                                 JSObject fi = filter.get("filter");
                                 sql += (" or " + fi.get("key") + " " + getOp((Long) fi.get("operator")) + " ?");
                                 values.add(fi.get("value"));
@@ -366,7 +367,7 @@ public class StoreClient extends Store {
                 } else {
                     this.whereFlag = true;
                     JSObject zo = new JSObject();
-                    zo.put("connector", Long.valueOf(Store.WHERE));
+                    zo.put("connector", Long.valueOf(WHERE));
                     zo.put("filter", filter);
                     this.filterObject.add("filters", zo);
                     return this;
@@ -382,7 +383,7 @@ public class StoreClient extends Store {
                     throw new IllegalArgeeMentException("where clause not found");
                 } else {
                     JSObject zo = new JSObject();
-                    zo.put("connector", Long.valueOf(Store.AND));
+                    zo.put("connector", Long.valueOf(AND));
                     zo.put("filter", filter);
                     this.filterObject.add("filters", zo);
                     return this;
@@ -398,7 +399,7 @@ public class StoreClient extends Store {
                     throw new IllegalArgeeMentException("where clause not found");
                 } else {
                     JSObject zo = new JSObject();
-                    zo.put("connector", Long.valueOf(Store.OR));
+                    zo.put("connector", Long.valueOf(OR));
                     zo.put("filter", filter);
                     this.filterObject.add("filters", zo);
                     return this;
@@ -415,15 +416,15 @@ public class StoreClient extends Store {
             for (int i$ = 0; i$ < len$; ++i$) {
                 String key = arr$[i$];
                 if (this.orderByMap.containsKey(key)) {
-                    if (((Long) this.orderByMap.get(key)).longValue() != Store.ASC) {
+                    if (((Long) this.orderByMap.get(key)).longValue() != ASC) {
                         throw new IllegalArgeeMentException("conflict order on same key");
                     }
                 } else {
                     JSObject zo = new JSObject();
                     zo.put("key", key);
-                    zo.put("order", Long.valueOf(Store.ASC));
+                    zo.put("order", Long.valueOf(ASC));
                     this.filterObject.add("orderBy", zo);
-                    this.orderByMap.put(key, Long.valueOf(Store.ASC));
+                    this.orderByMap.put(key, Long.valueOf(ASC));
                 }
             }
             return this;
@@ -436,15 +437,15 @@ public class StoreClient extends Store {
             for (int i$ = 0; i$ < len$; ++i$) {
                 String key = arr$[i$];
                 if (this.orderByMap.containsKey(key)) {
-                    if (((Long) this.orderByMap.get(key)).longValue() != Store.DESC) {
+                    if (((Long) this.orderByMap.get(key)).longValue() != DESC) {
                         throw new IllegalArgeeMentException("conflict order on same key");
                     }
                 } else {
                     JSObject zo = new JSObject();
                     zo.put("key", key);
-                    zo.put("order", Long.valueOf(Store.DESC));
+                    zo.put("order", Long.valueOf(DESC));
                     this.filterObject.add("orderBy", zo);
-                    this.orderByMap.put(key, Long.valueOf(Store.DESC));
+                    this.orderByMap.put(key, Long.valueOf(DESC));
                 }
             }
 
@@ -473,21 +474,21 @@ public class StoreClient extends Store {
                     for (JSObject filter : filters) {
                         long con = filter.get("connector");
                         switch ((int) con) {
-                            case Store.WHERE: {
+                            case WHERE: {
                                 JSObject fi = filter.get("filter");
                                 sql += (" where " + fi.get("key") + " " + getOp((Long) fi.get("operator")) + " ?");
                                 values.add(fi.get("value"));
                             }
                             break;
 
-                            case Store.AND: {
+                            case AND: {
                                 JSObject fi = filter.get("filter");
                                 sql += (" and " + fi.get("key") + " " + getOp((Long) fi.get("operator")) + " ?");
                                 values.add(fi.get("value"));
                             }
                             break;
 
-                            case Store.OR: {
+                            case OR: {
                                 JSObject fi = filter.get("filter");
                                 sql += (" or " + fi.get("key") + " " + getOp((Long) fi.get("operator")) + " ?");
                                 values.add(fi.get("value"));
@@ -576,7 +577,7 @@ public class StoreClient extends Store {
                 } else {
                     this.whereFlag = true;
                     JSObject zo = new JSObject();
-                    zo.put("connector", Long.valueOf(Store.WHERE));
+                    zo.put("connector", Long.valueOf(WHERE));
                     zo.put("filter", filter);
                     this.filterObject.add("filters", zo);
                     return this;
@@ -592,7 +593,7 @@ public class StoreClient extends Store {
                     throw new IllegalArgeeMentException("where clause not found");
                 } else {
                     JSObject zo = new JSObject();
-                    zo.put("connector", Long.valueOf(Store.AND));
+                    zo.put("connector", Long.valueOf(AND));
                     zo.put("filter", filter);
                     this.filterObject.add("filters", zo);
                     return this;
@@ -608,7 +609,7 @@ public class StoreClient extends Store {
                     throw new IllegalArgeeMentException("where clause not found");
                 } else {
                     JSObject zo = new JSObject();
-                    zo.put("connector", Long.valueOf(Store.OR));
+                    zo.put("connector", Long.valueOf(OR));
                     zo.put("filter", filter);
                     this.filterObject.add("filters", zo);
                     return this;
@@ -625,15 +626,15 @@ public class StoreClient extends Store {
             for (int i$ = 0; i$ < len$; ++i$) {
                 String key = arr$[i$];
                 if (this.orderByMap.containsKey(key)) {
-                    if (((Long) this.orderByMap.get(key)).longValue() != Store.ASC) {
+                    if (((Long) this.orderByMap.get(key)).longValue() != ASC) {
                         throw new IllegalArgeeMentException("conflict order on same key");
                     }
                 } else {
                     JSObject zo = new JSObject();
                     zo.put("key", key);
-                    zo.put("order", Long.valueOf(Store.ASC));
+                    zo.put("order", Long.valueOf(ASC));
                     this.filterObject.add("orderBy", zo);
-                    this.orderByMap.put(key, Long.valueOf(Store.ASC));
+                    this.orderByMap.put(key, Long.valueOf(ASC));
                 }
             }
             return this;
@@ -646,15 +647,15 @@ public class StoreClient extends Store {
             for (int i$ = 0; i$ < len$; ++i$) {
                 String key = arr$[i$];
                 if (this.orderByMap.containsKey(key)) {
-                    if (((Long) this.orderByMap.get(key)).longValue() != Store.DESC) {
+                    if (((Long) this.orderByMap.get(key)).longValue() != DESC) {
                         throw new IllegalArgeeMentException("conflict order on same key");
                     }
                 } else {
                     JSObject zo = new JSObject();
                     zo.put("key", key);
-                    zo.put("order", Long.valueOf(Store.DESC));
+                    zo.put("order", Long.valueOf(DESC));
                     this.filterObject.add("orderBy", zo);
-                    this.orderByMap.put(key, Long.valueOf(Store.DESC));
+                    this.orderByMap.put(key, Long.valueOf(DESC));
                 }
             }
 
@@ -690,21 +691,21 @@ public class StoreClient extends Store {
                     for (JSObject filter : filters) {
                         long con = filter.get("connector");
                         switch ((int) con) {
-                            case Store.WHERE: {
+                            case WHERE: {
                                 JSObject fi = filter.get("filter");
                                 sql += (" where " + fi.get("key") + " " + getOp((Long) fi.get("operator")) + " ?");
                                 values.add(fi.get("value"));
                             }
                             break;
 
-                            case Store.AND: {
+                            case AND: {
                                 JSObject fi = filter.get("filter");
                                 sql += (" and " + fi.get("key") + " " + getOp((Long) fi.get("operator")) + " ?");
                                 values.add(fi.get("value"));
                             }
                             break;
 
-                            case Store.OR: {
+                            case OR: {
                                 JSObject fi = filter.get("filter");
                                 sql += (" or " + fi.get("key") + " " + getOp((Long) fi.get("operator")) + " ?");
                                 values.add(fi.get("value"));
@@ -772,7 +773,7 @@ public class StoreClient extends Store {
                 } else {
                     this.whereFlag = true;
                     JSObject zo = new JSObject();
-                    zo.put("connector", Long.valueOf(Store.WHERE));
+                    zo.put("connector", Long.valueOf(WHERE));
                     zo.put("filter", filter);
                     this.filterObject.add("filters", zo);
                     return this;
@@ -788,7 +789,7 @@ public class StoreClient extends Store {
                     throw new IllegalArgeeMentException("where clause not found");
                 } else {
                     JSObject zo = new JSObject();
-                    zo.put("connector", Long.valueOf(Store.AND));
+                    zo.put("connector", Long.valueOf(AND));
                     zo.put("filter", filter);
                     this.filterObject.add("filters", zo);
                     return this;
@@ -804,7 +805,7 @@ public class StoreClient extends Store {
                     throw new IllegalArgeeMentException("where clause not found");
                 } else {
                     JSObject zo = new JSObject();
-                    zo.put("connector", Long.valueOf(Store.OR));
+                    zo.put("connector", Long.valueOf(OR));
                     zo.put("filter", filter);
                     this.filterObject.add("filters", zo);
                     return this;
@@ -821,15 +822,15 @@ public class StoreClient extends Store {
             for (int i$ = 0; i$ < len$; ++i$) {
                 String key = arr$[i$];
                 if (this.orderByMap.containsKey(key)) {
-                    if (((Long) this.orderByMap.get(key)).longValue() != Store.ASC) {
+                    if (((Long) this.orderByMap.get(key)).longValue() != ASC) {
                         throw new IllegalArgeeMentException("conflict order on same key");
                     }
                 } else {
                     JSObject zo = new JSObject();
                     zo.put("key", key);
-                    zo.put("order", Long.valueOf(Store.ASC));
+                    zo.put("order", Long.valueOf(ASC));
                     this.filterObject.add("orderBy", zo);
-                    this.orderByMap.put(key, Long.valueOf(Store.ASC));
+                    this.orderByMap.put(key, Long.valueOf(ASC));
                 }
             }
             return this;
@@ -842,15 +843,15 @@ public class StoreClient extends Store {
             for (int i$ = 0; i$ < len$; ++i$) {
                 String key = arr$[i$];
                 if (this.orderByMap.containsKey(key)) {
-                    if (((Long) this.orderByMap.get(key)).longValue() != Store.DESC) {
+                    if (((Long) this.orderByMap.get(key)).longValue() != DESC) {
                         throw new IllegalArgeeMentException("conflict order on same key");
                     }
                 } else {
                     JSObject zo = new JSObject();
                     zo.put("key", key);
-                    zo.put("order", Long.valueOf(Store.DESC));
+                    zo.put("order", Long.valueOf(DESC));
                     this.filterObject.add("orderBy", zo);
-                    this.orderByMap.put(key, Long.valueOf(Store.DESC));
+                    this.orderByMap.put(key, Long.valueOf(DESC));
                 }
             }
 
@@ -870,21 +871,21 @@ public class StoreClient extends Store {
                     for (JSObject filter : filters) {
                         long con = filter.get("connector");
                         switch ((int) con) {
-                            case Store.WHERE: {
+                            case WHERE: {
                                 JSObject fi = filter.get("filter");
                                 sql += (" where " + fi.get("key") + " " + getOp((Long) fi.get("operator")) + " ?");
                                 values.add(fi.get("value"));
                             }
                             break;
 
-                            case Store.AND: {
+                            case AND: {
                                 JSObject fi = filter.get("filter");
                                 sql += (" and " + fi.get("key") + " " + getOp((Long) fi.get("operator")) + " ?");
                                 values.add(fi.get("value"));
                             }
                             break;
 
-                            case Store.OR: {
+                            case OR: {
                                 JSObject fi = filter.get("filter");
                                 sql += (" or " + fi.get("key") + " " + getOp((Long) fi.get("operator")) + " ?");
                                 values.add(fi.get("value"));
@@ -924,9 +925,9 @@ public class StoreClient extends Store {
 
     private String getOrder(long i) {
         switch ((int) i) {
-            case Store.ASC:
+            case ASC:
                 return "asc";
-            case Store.DESC:
+            case DESC:
                 return "desc";
             default:
                 return "desc";

@@ -1,4 +1,4 @@
-package db;
+package com.tustcs.base.db;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;

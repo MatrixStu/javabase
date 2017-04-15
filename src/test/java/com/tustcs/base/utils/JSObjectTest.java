@@ -1,7 +1,6 @@
-package utils;
+package com.tustcs.base.utils;
 
 import junit.framework.TestCase;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;

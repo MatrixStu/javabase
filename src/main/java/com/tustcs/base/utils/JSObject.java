@@ -1,4 +1,4 @@
-package utils;
+package com.tustcs.base.utils;
 
 import java.util.*;
 

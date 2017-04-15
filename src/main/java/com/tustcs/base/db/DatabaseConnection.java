@@ -1,6 +1,6 @@
-package db;
+package com.tustcs.base.db;
 
-import utils.Log;
+import com.tustcs.base.utils.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

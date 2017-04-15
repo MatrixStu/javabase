@@ -1,10 +1,10 @@
-package services;
+package com.tustcs.base.services;
 
-import db.DatabaseConnection;
-import db.Sql;
-import utils.JSObject;
-import utils.Filter;
-import utils.IllegalArgeeMentException;
+import com.tustcs.base.db.DatabaseConnection;
+import com.tustcs.base.db.Sql;
+import com.tustcs.base.utils.JSObject;
+import com.tustcs.base.utils.Filter;
+import com.tustcs.base.utils.IllegalArgeeMentException;
 
 import java.util.List;
 

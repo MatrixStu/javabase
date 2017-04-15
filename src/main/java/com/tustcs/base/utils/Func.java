@@ -1,7 +1,7 @@
-package utils;
+package com.tustcs.base.utils;
 
 
-import static services.DB.*;
+import static com.tustcs.base.services.DB.*;
 
 /**
  * Created by yhy on 2016/7/14.

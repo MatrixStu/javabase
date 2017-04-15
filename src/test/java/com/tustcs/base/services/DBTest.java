@@ -1,7 +1,7 @@
-package services;
+package com.tustcs.base.services;
 
 import junit.framework.TestCase;
-import utils.JSObject;
+import com.tustcs.base.utils.JSObject;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package db;
+package com.tustcs.base.db;
 
 
 
-import utils.JSObject;
+import com.tustcs.base.utils.JSObject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

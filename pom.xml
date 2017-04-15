@@ -80,22 +80,22 @@
                         <!--<option>-keep class org.noahx.proguard.example.project2.bean.** { *;}</option>-->
                         <!--&lt;!&ndash;保持 Bean 类，（由于很多框架会对 Bean 中的内容做反射处理，请根据自己的业务调整） &ndash;&gt;-->
 
-                        <option>-keep class services.DB {*;}
+                        <option>-keep class com.tustcs.base.services.DB {*;}
                         </option>
 
-                        <option>-keepnames class services.StoreClient {*;}
+                        <option>-keepnames class com.tustcs.base.services.StoreClient {*;}
                         </option>
 
-                        <option>-keepnames class services.StoreClient$* {*;}
+                        <option>-keepnames class com.tustcs.base.services.StoreClient$* {*;}
                         </option>
 
-                        <option>-keepnames class services.Store$* {*;}
+                        <option>-keepnames class com.tustcs.base.services.Store$* {*;}
                         </option>
 
-                        <option>-keep class services.Store {*;}
+                        <option>-keep class com.tustcs.base.services.Store {*;}
                         </option>
 
-                        <option>-keep class utils.* {*;}
+                        <option>-keep class com.tustcs.base.utils.* {*;}
                         </option>
                         <!-- 保持对外的接口性质类对外的类名与方法名不变 -->
 
