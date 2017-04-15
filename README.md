@@ -1,3 +1,4 @@
+# 基于JDBC的java数据库操作框架DB-helper(目前仅支持mysql)
 
 > JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口组成。
 > 本框架是对jdbc的进一步简单封装，相较hibernate，mybaits等框架而言拥有良好的性能。
