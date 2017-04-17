@@ -1,18 +1,22 @@
 package com.tustcs.base.db;
 
+import com.tustcs.base.services.DB;
 import com.tustcs.base.utils.JSObject;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DaoProxy implements IDao {
-	private DatabaseConnection dbc = null;
+	private Connection conn = null;
+	private DataSource dsc = DB.dsc;
 	private IDao dao = null;
 
 	public DaoProxy() throws SQLException{
-		this.dbc = new DatabaseConnection();
-		this.dao = new DaoImpl(this.dbc.getConnection());
+		this.conn = this.dsc.getConnection();
+		this.dao = new DaoImpl(conn);
 	}
 
 
@@ -23,10 +27,12 @@ public class DaoProxy implements IDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				this.dbc.releaseConn();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if(this.conn != null ){
+				try{
+					this.conn.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -40,10 +46,12 @@ public class DaoProxy implements IDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				this.dbc.releaseConn();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if(this.conn != null ){
+				try{
+					this.conn.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 		}
 		return map;
@@ -57,10 +65,12 @@ public class DaoProxy implements IDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				this.dbc.releaseConn();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if(this.conn != null ){
+				try{
+					this.conn.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 		}
 		return flag;

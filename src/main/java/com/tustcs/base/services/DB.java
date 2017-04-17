@@ -1,12 +1,15 @@
 package com.tustcs.base.services;
 
-import com.tustcs.base.db.DatabaseConnection;
+import com.tustcs.base.db.SimpleDataSource;
 import com.tustcs.base.db.Sql;
 import com.tustcs.base.utils.JSObject;
 import com.tustcs.base.utils.Filter;
 import com.tustcs.base.utils.IllegalArgeeMentException;
+import org.apache.commons.dbcp2.BasicDataSourceFactory;
 
+import javax.sql.DataSource;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by yhy on 2016/7/17.
@@ -18,14 +21,32 @@ public class DB {
     public static final int MIN = 4;
     public static final int DISTINCT = 5;
     public static final int AVG = 6;
+    public static DataSource dsc = null;
 
     private static Store store ;
     private static boolean debuged = false;
     private static boolean inited = false;
     public static void init(String userName,String userPwd,String dbUrl){
-        DatabaseConnection.USERNAME = userName;
-        DatabaseConnection.PASSWORD = userPwd;
-        DatabaseConnection.URL = dbUrl;
+        SimpleDataSource.user = userName;
+        SimpleDataSource.pswd = userPwd;
+        SimpleDataSource.url = dbUrl;
+        dsc = SimpleDataSource.instance();
+        store = new StoreClient();
+        inited = true;
+    }
+
+    public static void init(String userName,String userPwd,String dbUrl,String driver){
+        SimpleDataSource.user = userName;
+        SimpleDataSource.pswd = userPwd;
+        SimpleDataSource.url = dbUrl;
+        SimpleDataSource.dirverClassName = driver;
+        dsc = SimpleDataSource.instance();
+        store = new StoreClient();
+        inited = true;
+    }
+
+    public static void init(DataSource dataSource){
+        dsc = dataSource;
         store = new StoreClient();
         inited = true;
     }
@@ -106,5 +127,48 @@ public class DB {
             throw new IllegalArgeeMentException("must call Db.inited method firtly");
         }
         return store.func(func,column);
+    }
+
+    /**
+     * 因为junit不支持多线程测试,所以用main方法替代之
+     * **/
+    public static void main(String[] args) throws Exception{
+        final long temp = System.currentTimeMillis();
+        final String table = "tust_tv_signals";
+
+        Properties prop = new Properties();
+        prop.setProperty("driver", "com.mysql.jdbc.Driver");
+        prop.setProperty("url", "jdbc:mysql://localhost:3306/tust_tv?useUnicode=true&characterEncoding=UTF-8");
+        prop.setProperty("username", "root");
+        prop.setProperty("password", "");
+        prop.setProperty("initialSize", "3");
+        prop.setProperty("maxIdle", "10");
+        prop.setProperty("maxActive", "20");
+        //144852 6013
+        DataSource ds = BasicDataSourceFactory.createDataSource(prop);
+//        DB.init("root","","jdbc:mysql://localhost:3306/tust_tv?useUnicode=true&characterEncoding=UTF-8");
+        DB.init(ds);
+        DB.setDebuged(true);
+
+        for (int i = 0; i < 100; i++) {
+            new Thread(){
+                @Override
+                public void run() {
+                    for (int j = 0; j < 100; j++) {
+                        try{
+                            List<JSObject> objectList = DB.scan(table)
+                                    .select("*")
+                                    .groupBy("tvId", "signalId")
+                                    .orderByDesc("tvId")
+                                    .execute();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                    }
+                    System.out.println("" + (System.currentTimeMillis() - temp));
+                }
+            }.start();
+        }
     }
 }
